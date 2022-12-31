@@ -5,6 +5,8 @@ import java.util.List;
 import com.driver.model.request.OrderDetailsRequestModel;
 import com.driver.model.response.OperationStatusModel;
 import com.driver.model.response.OrderDetailsResponse;
+import com.driver.model.response.RequestOperationName;
+import com.driver.model.response.RequestOperationStatus;
 import com.driver.service.impl.OrderServiceImpl;
 import com.driver.shared.dto.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +47,8 @@ public class OrderController {
 	@DeleteMapping(path = "/{id}")
 	public OperationStatusModel deleteOrder(@PathVariable String id) throws Exception {
 		orderService.deleteOrder(id);
-		return new OperationStatusModel();
+		OperationStatusModel operationStatusModel=OperationStatusModel.builder().operationResult(String.valueOf(RequestOperationStatus.SUCCESS)).operationName(String.valueOf(RequestOperationName.DELETE)).build();
+		return operationStatusModel;
 	}
 	
 	@GetMapping()

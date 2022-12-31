@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.driver.model.request.UserDetailsRequestModel;
 import com.driver.model.response.OperationStatusModel;
+import com.driver.model.response.RequestOperationName;
+import com.driver.model.response.RequestOperationStatus;
 import com.driver.model.response.UserResponse;
 import com.driver.service.UserService;
 import com.driver.service.impl.UserServiceImpl;
@@ -46,7 +48,8 @@ public class UserController {
 	@DeleteMapping(path = "/{id}")
 	public OperationStatusModel deleteUser(@PathVariable String id) throws Exception{
 		userService.deleteUser(id);
-		return new OperationStatusModel();
+		OperationStatusModel operationStatusModel=OperationStatusModel.builder().operationResult(String.valueOf(RequestOperationStatus.SUCCESS)).operationName(String.valueOf(RequestOperationName.DELETE)).build();
+		return operationStatusModel;
 	}
 	
 	@GetMapping()

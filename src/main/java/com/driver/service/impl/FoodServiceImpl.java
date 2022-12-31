@@ -23,6 +23,9 @@ public class FoodServiceImpl implements FoodService {
     @Override
     public FoodDto getFoodById(String foodId) throws Exception {
         FoodEntity foodEntity=foodRepository.findByFoodId(foodId);
+        if(foodEntity==null){
+            throw new Exception("Foodentity Not Exist");
+        }
         return FoodDto.builder().foodId(foodEntity.getFoodId()).foodPrice(foodEntity.getFoodPrice()).foodName(foodEntity.getFoodName()).foodCategory(foodEntity.getFoodCategory()).id(foodEntity.getId()).build();
     }
 
